@@ -1,3 +1,4 @@
+#hi user
 # -*- coding: utf-8 -*-
 # seq2seq_attention: 1.word embedding 2.encoder 3.decoder(optional with attention).
 

@@ -1,3 +1,4 @@
+#hi user
 # -*- coding: utf-8 -*-
 """
 Given a training set of lat/lon as input and probability distribution over words as output, train a

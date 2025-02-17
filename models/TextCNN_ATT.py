@@ -1,3 +1,5 @@
+
+#hi user
 """
 ABCNN Structure
 Structure:embedding ---> conv---> max pooling ---> fully connected layer ----> softmax (for classification)

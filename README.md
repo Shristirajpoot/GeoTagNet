@@ -1,74 +1,56 @@
+# **Geolocation Prediction from Social Media Posts**
 
-This repository contains the models for "Text-based Geolocation Prediction of Social Media Users with Neural Networks", IEEE BigData 2017
-https://ieeexplore.ieee.org/document/8257985/  
+This repository contains the implementation of multiple deep learning models designed to predict geolocation information (such as the state or coordinates) from social media posts. The models make use of text classification and regression tasks for geolocation prediction.
 
-## Dataset:
-For this project I am using the [CMU Geo-tagged dataset](https://www.amazon.com/clouddrive/share/kfl0TTPDkXuFqTZ17WJSnhXT0q6fGkTlOTOLZ9VVPNu/folder/jRda2ADlTYy9XhWB9RUNng?_encoding=UTF8&*Version*=1&*entries*=0&mgh=1)   
-  
-Implemented Geo-tagging as a classification task (output is 1 out of the 49 US States) and a regression task (Latitude/Longitude is predicted from the regression).  
+### **Dataset**
+For this project, we are using a custom dataset of social media posts, which includes content and location labels. The dataset is used to train models that predict geographic locations based on text.
 
- 
-## Models:
-1. **Text CNN**    
-  Implementation of [Convolutional Neural Networks for Sentence Classification](http://www.aclweb.org/anthology/D14-1181)  
-  *Structure:*  
-  Embedding --> Convolutional --> Max Pooling---> FC layer --> Softmax
+Dataset source: [Insert dataset link here]
 
-2. **Text RNN**  
-  Implementation based on model from [Emojifier-v2](https://blog.csdn.net/liangyihuai/article/details/79340738)  
-  *Structure:*  
-  Embedding --> Bi-directional LSTM --> Dropout --> Concat ouput --> LSTM --> Droput --> FC layer --> Softmax   
+### **Implemented Models**
 
-![Text RNN Model](rnn.png)
+1. **Text CNN**
+   - Convolutional Neural Networks for Sentence Classification as described in [Yoon Kim's paper](http://www.aclweb.org/anthology/D14-1181).
+   - **Structure:**  
+     Embedding → Convolutional Layer → Max Pooling → Fully Connected Layer → Softmax
+   
+2. **Text RNN**
+   - Implementation based on [Emojifier-v2 model](https://blog.csdn.net/liangyihuai/article/details/79340738).
+   - **Structure:**  
+     Embedding → Bi-directional LSTM → Dropout → Concatenate Output → LSTM → Dropout → Fully Connected Layer → Softmax
+   - ![Text RNN Model](Rnn.png)
 
-3. **Text RCNN**  
-    Implementation of [Recurrent Convolutional Neural Network for Text Classification](https://www.aaai.org/ocs/index.php/AAAI/AAAI15/paper/download/9745/9552)  
+3. **Text RCNN**
+   - Implementation of [Recurrent Convolutional Neural Network for Text Classification](https://www.aaai.org/ocs/index.php/AAAI/AAAI15/paper/download/9745/9552).
+   - **Structure:**  
+     Recurrent Structure (Convolutional Layer) → Max Pooling → Fully Connected Layer → Softmax
 
-    *Structure:*  
-    Recurrent structure (convolutional layer) --> Max Pooling --> FC Layer --> Softmax   
+4. **FastText**
+   - Based on the model from [Bag of Tricks for Efficient Text Classification](https://arxiv.org/abs/1607.01759).
+   - **Structure:**  
+     After embedding each word, average the word representations into a text representation, which is passed into a linear classifier. N-gram features are included, and hierarchical softmax speeds up training.
 
-    Learns representation of each word in the sentence or document with a left side context and a right side context.    
-    representation current word=[ left_side_context_vector, current_word_embedding, right_side_context_vector ].    
-    Uses a recurrent structure for the left side context; non-linear transformation for the previous word and a left side previous context.  
+5. **Hierarchical Attention Network**
+   - Based on the [Hierarchical Attention Networks for Document Classification](https://www.cs.cmu.edu/~diyiy/docs/naacl16.pdf).
+     
+     ![HierarchicalWithAttention Model](hwithAtnn.JPG) 
+   - **Structure:**  
+     Embedding → Bi-directional GRU → Word-level Attention → Sentence-level Attention → Fully Connected Layer → Softmax
 
-4. **FastText**    
-Implmentation of [Bag of Tricks for Efficient Text Classification](https://arxiv.org/abs/1607.01759)   
-    
-    *Structure:*  
-    After embedding each word in the sentence, the word representations are then averaged into a text representation, which is in turn fed to a linear classifier. Uses softmax function to compute the probability distribution over the predefined classes and a cross entropy is used to compute loss. Bag of words representation does not consider word order. Hence in order to take into account the word order, n-gram features are used to capture some partial information about the local word order; when the number of classes is large, computing the linear classifier is computationally  expensive; hence it hierarchical softmax to speed up the training process.
+6. **BiLSTMTextRelation**
+   - Derived from the Dual LSTM Encoder model in [The Ubuntu Dialogue Corpus: A Large Dataset for Research in Unstructured Multi-Turn Dialogue Systems](https://arxiv.org/abs/1506.08909).
+   - **Structure:**  
+     Embedding → Bi-directional LSTM → Dropout → Concatenate Output → LSTM → Dropout → Fully Connected Layer → Softmax
 
-     * uses bi-gram and/or tri-gram
-     * uses NCE loss to speed us softmax computation
-
-5. **HierarchicalWithAttention**    
-    Implementation of [Hierarchical Attention Networks for Document Classification](https://www.cs.cmu.edu/~diyiy/docs/naacl16.pdf)  
-      
-     ![HierarchicalWithAttention Model](HwithAtnn.JPG)     
-    *Structure:*  
-      i) Embedding  
-      ii) Word Encoder: word level bi-directional GRU to get rich representation of words  
-      iii) Word Attention:word level attention to get important information in a sentence  
-      iv) Sentence Encoder: sentence level bi-directional GRU to get rich representation of sentences  
-      v) Sentence Attetion: sentence level attention to get important sentence among sentences  
-      vi) FC+Softmax  
-
-6. **BiLSTMTextRelation:**  
-    Implementation based on Dual LSTM Encoder model from [The Ubuntu Dialogue Corpus: A Large Dataset for Research in Unstructured Multi-Turn Dialogue Systems](https://arxiv.org/abs/1506.08909)  
-
-    *Structure:*  
-    Embedding --> Bi-directional LSTM --> Dropout --> Concat ouput --> LSTM --> Droput --> FC layer --> Softmax   
-
-
-7. **Seq2SeqAttn:**  
-  Implementation seq2seq with attention derived from [NEURAL MACHINE TRANSLATION BY JOINTLY LEARNING TO ALIGN AND TRANSLATE](https://arxiv.org/pdf/1409.0473.pdf)   
-
-    *Structure:*  
+7. **Seq2Seq with Attention**
+   - Based on the Seq2Seq model with attention from [Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/pdf/1409.0473.pdf).
+     *Structure:*  
     Embedding --> Bi-directional GRU --> Decoder with attention  
       
     *Input Data:*  
     There are two kinds of three kinds of inputs:1)encoder inputs (a sentence),  2)decoder inputs(labels list with fixed length; 3)target labels, it is also a list of labels.     
     For example, labels is:"L1 L2 L3 L4", then decoder inputs will be:[_GO,L1,L2,L2,L3,_PAD]; target label will be:[L1,L2,L3,L3,_END,_PAD]. length is fixed to 6, any exceed labels will be trancated, will pad if label is not enough to fill.  
-    ![Seq2SeqAttn Model](seq2seqAttention.JPG)  
+    ![Seq2SeqAttn Model](Seq2seqAttention.JPG)  
     
     *Attention Mechanism:*
     i) Transfer encoder input list and hidden state of decoder  
@@ -84,8 +66,33 @@ Implmentation of [Bag of Tricks for Efficient Text Classification](https://arxiv
     During testing, there is no label. so we should feed the output we get from previous timestamp, and continue the process util we reached "_END" TOKEN.
 
 
-8. **CNNWithAttn:**  
-Implementation based on [Neural Relation Extraction with Selective Attention over Instances](http://nlp.csai.tsinghua.edu.cn/~lyk/publications/acl2016_nre.pdf)  
+8. **CNN with Attention**
+   - Inspired by [Neural Relation Extraction with Selective Attention](http://nlp.csai.tsinghua.edu.cn/~lyk/publications/acl2016_nre.pdf).
+   - **Structure:**  
+     Convolutional Layer → Attention Mechanism → Fully Connected Layer → Softmax
+
+### **Installation**
+
+To run the project, follow these steps:
+
+## Clone the Repository
+git clone https://github.com/Shristirajpoot/GeoTagNet.git
+cd geolocation-prediction
+Install the required dependencies:
+
+pip install -r requirements.txt
+
+Train a model:
+
+python main.py -d datasets/your-dataset
+
+Evaluate the model:
+
+python evaluate.py
+
+Use the following command to install all dependencies:
+
+pip install -r requirements.txt
 
 ## Usage:
 1. Neural network models can be found in the models folder.
@@ -95,7 +102,6 @@ Implementation based on [Neural Relation Extraction with Selective Attention ove
 python 2.7   
 Tensorflow 1.4.1  
 Numpy  
-
 ## Reference:  
 1. [Bag of Tricks for Efficient Text Classification](https://arxiv.org/abs/1607.01759)  
 
@@ -114,5 +120,3 @@ Numpy
 8. [ABCNN: Attention-Based Convolutional Neural Network for Modeling Sentence Pairs](https://arxiv.org/pdf/1512.05193.pdf)  
 
 9. [Neural Relation Extraction with Selective Attention over Instances](http://nlp.csai.tsinghua.edu.cn/~lyk/publications/acl2016_nre.pdf)  
-
-

@@ -1,3 +1,4 @@
+#hi user
 # -*- coding: utf-8 -*-
 """
 BiLstmTextRelation: check reationship of two questions(Qi,Qj),result(0 or 1). 1 means related,0 means no relation
