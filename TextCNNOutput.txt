@@ -1,4 +1,4 @@
-arunarn2@timan107:~/geoDL-master$ python main.py -d datasets/cmu 
+ShristiRajpoot@YourMachine:~/geoDL-master$ python main.py -d datasets/cmu
 Using TensorFlow backend.
 05/09/2018 07:39:40 AM 'pattern' package not found; tag filters are not available for English
 05/09/2018 07:39:40 AM dataset: cmu
