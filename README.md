@@ -1,48 +1,48 @@
-# **Geolocation Prediction from Social Media Posts**
+# 🌍 **Geolocation Prediction from Social Media Posts** 📍
 
 This repository contains the implementation of multiple deep learning models designed to predict geolocation information (such as the state or coordinates) from social media posts. The models make use of text classification and regression tasks for geolocation prediction.
 
-### **Dataset**
+### 📊 **Dataset**
 For this project, we are using a custom dataset of social media posts, which includes content and location labels. The dataset is used to train models that predict geographic locations based on text.
 
 Dataset source: [Insert dataset link here]
+### 🧠 **Implemented Models**
 
-### **Implemented Models**
+1. **Text CNN** 🧩
 
-1. **Text CNN**
    - Convolutional Neural Networks for Sentence Classification as described in [Yoon Kim's paper](http://www.aclweb.org/anthology/D14-1181).
    - **Structure:**  
      Embedding → Convolutional Layer → Max Pooling → Fully Connected Layer → Softmax
-   
-2. **Text RNN**
+
+2. **Text RNN** 🔄
    - Implementation based on [Emojifier-v2 model](https://blog.csdn.net/liangyihuai/article/details/79340738).
    - **Structure:**  
      Embedding → Bi-directional LSTM → Dropout → Concatenate Output → LSTM → Dropout → Fully Connected Layer → Softmax
    - ![Text RNN Model](Rnn.png)
 
-3. **Text RCNN**
+3. **Text RCNN**🔁
    - Implementation of [Recurrent Convolutional Neural Network for Text Classification](https://www.aaai.org/ocs/index.php/AAAI/AAAI15/paper/download/9745/9552).
    - **Structure:**  
      Recurrent Structure (Convolutional Layer) → Max Pooling → Fully Connected Layer → Softmax
 
-4. **FastText**
+4. **FastText**🚀
    - Based on the model from [Bag of Tricks for Efficient Text Classification](https://arxiv.org/abs/1607.01759).
    - **Structure:**  
      After embedding each word, average the word representations into a text representation, which is passed into a linear classifier. N-gram features are included, and hierarchical softmax speeds up training.
 
-5. **Hierarchical Attention Network**
+5. **Hierarchical Attention Network**🔍
    - Based on the [Hierarchical Attention Networks for Document Classification](https://www.cs.cmu.edu/~diyiy/docs/naacl16.pdf).
      
      ![HierarchicalWithAttention Model](hwithAtnn.JPG) 
    - **Structure:**  
      Embedding → Bi-directional GRU → Word-level Attention → Sentence-level Attention → Fully Connected Layer → Softmax
 
-6. **BiLSTMTextRelation**
+6. **BiLSTMTextRelation**🔗
    - Derived from the Dual LSTM Encoder model in [The Ubuntu Dialogue Corpus: A Large Dataset for Research in Unstructured Multi-Turn Dialogue Systems](https://arxiv.org/abs/1506.08909).
    - **Structure:**  
      Embedding → Bi-directional LSTM → Dropout → Concatenate Output → LSTM → Dropout → Fully Connected Layer → Softmax
 
-7. **Seq2Seq with Attention**
+7. **Seq2Seq with Attention**🧑‍🏫
    - Based on the Seq2Seq model with attention from [Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/pdf/1409.0473.pdf).
      *Structure:*  
     Embedding --> Bi-directional GRU --> Decoder with attention  
@@ -66,12 +66,12 @@ Dataset source: [Insert dataset link here]
     During testing, there is no label. so we should feed the output we get from previous timestamp, and continue the process util we reached "_END" TOKEN.
 
 
-8. **CNN with Attention**
+8. **CNN with Attention** 🔍💡
    - Inspired by [Neural Relation Extraction with Selective Attention](http://nlp.csai.tsinghua.edu.cn/~lyk/publications/acl2016_nre.pdf).
    - **Structure:**  
      Convolutional Layer → Attention Mechanism → Fully Connected Layer → Softmax
 
-### **Installation**
+### 💻 **Installation**
 
 To run the project, follow these steps:
 
@@ -94,15 +94,14 @@ Use the following command to install all dependencies:
 
 pip install -r requirements.txt
 
-## Usage:
-1. Neural network models can be found in the models folder.
+⚙️ Usage
+Neural network models are located in the models folder.
+🌍 Environment
+Python 2.7
+TensorFlow 1.4.1
+Numpy
 
-
-## Envionment:
-python 2.7   
-Tensorflow 1.4.1  
-Numpy  
-## Reference:  
+## 📚 Reference:  
 1. [Bag of Tricks for Efficient Text Classification](https://arxiv.org/abs/1607.01759)  
 
 2. [Convolutional Neural Networks for Sentence Classification](http://www.aclweb.org/anthology/D14-1181)  
